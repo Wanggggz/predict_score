@@ -69,18 +69,20 @@ class suffle():
         counter = 0
         userList = []
         kMovie = self.setMovie()
+        #print(kMovie)
         for i in data:
             key = i.keys()
            #print(key)
             for k in key:
                 tmp = kMovie.get(k,None)
                 if tmp != None:
-                    userList.append([counter,tmp[0],tmp[1]])
+                    userList.append([counter,tmp[0],i[k]])
             counter = counter + 1
-        print(userList)
+        #print(userList)
         db = pymysql.connect("123.207.154.167","root","123456wang","userBase" )
         cursor = db.cursor()
-        sql="insert into data(user_id, movie_id, rate) values (%s,%s,%s)"
+        cursor.execute('truncate table data;')
+        sql="insert into data(user_id, movie_id, rate) values (%s,%s,%s);"
         cursor.executemany(sql,userList)
         db.commit()
         db.close()
@@ -88,10 +90,10 @@ class suffle():
                 
         
 
-
 if __name__ == "__main__":
     a = suffle()
     #print(a.setMovie())
     parsedD = a.parseDatabase()
-    print(a.customlize(parsedD))
+    print(parsedD)
+    a.customlize(parsedD)
     #print(a.parseDatabase())
