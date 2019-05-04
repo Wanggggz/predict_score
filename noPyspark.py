@@ -1,7 +1,7 @@
 #-*- coding:utf-8 -*-
 #from pyspark import SparkContext
 #import sys
-from enum import Enum
+import pymysql
 
 class suffle():
     #[~~~~,[{2541: ['我们俩', '8.7'] , 2542: ['听见天堂 Rosso come il cielo', '8.9']}]]
@@ -12,7 +12,7 @@ class suffle():
         counter = 0
         movie = {}
         for i in movies:
-            movie.update({i[0]:[counter,float(i[1])]})
+            movie.update({i[0]:[counter,i[1]]})
             counter = counter+1
         return movie
 
@@ -68,18 +68,22 @@ class suffle():
     def customlize(self,data):
         counter = 0
         userList = []
+        kMovie = self.setMovie()
         for i in data:
             key = i.keys()
            #print(key)
             for k in key:
-                if self.setMovie().get(k,None) != None:
-                    userList.append([counter,self.setMovie().get(k,None)[0],self.setMovie().get(k,None)[1]])
+                tmp = kMovie.get(k,None)
+                if tmp != None:
+                    userList.append([counter,tmp[0],tmp[1]])
             counter = counter + 1
-        f = open('./temp','w+')
-        for line in userList:
-            f.writelines(str(line))
-            f.write(',')
-        f.close()
+        print(userList)
+        db = pymysql.connect("123.207.154.167","root","123456wang","userBase" )
+        cursor = db.cursor()
+        sql="insert into data(user_id, movie_id, rate) values (%s,%s,%s)"
+        cursor.executemany(sql,userList)
+        db.commit()
+        db.close()
         return userList
                 
         
