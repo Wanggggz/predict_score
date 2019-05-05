@@ -1,4 +1,4 @@
-a = 'niaho %s,%s' %('asd',123)
-b = 1
-c = {a:b}
-print(c)
+a = {1:0 , 2:10}
+for i in a.values():
+    print(i)
+print(len(a))
