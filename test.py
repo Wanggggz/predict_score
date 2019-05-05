@@ -1,4 +1,2 @@
-a = {1:0 , 2:10}
-for i in a.values():
-    print(i)
-print(len(a))
+for k  in {1:10,2:40}:
+    print(k)

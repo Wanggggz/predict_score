@@ -1,6 +1,7 @@
-import pymysql
 import math
 import sys
+
+import pymysql
 
  # 打开数据库连接
 db = pymysql.connect("123.207.154.167","root","123456wang","userBase" ) 
@@ -34,6 +35,9 @@ for i in DataList:
 for i in DataList:
     if dict_movie.get(i[4],None) == None:
         dict_movie.update({i[4]:i[1]})
+
+
+        
 #计算余弦距离
 def calcCosDistSpe(user1,user2):
     avg_x=0.0
