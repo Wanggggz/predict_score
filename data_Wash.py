@@ -83,7 +83,11 @@ class setUp():
 
             counter = counter + 1
         #print(userList)
-        db = pymysql.connect("123.207.154.167","root","123456wang","userBase" )
+        host = ''
+        user = ''
+        sql_passwd = ''
+        used_database = ''
+        db = pymysql.connect(host,user,sql_passwd,used_database)
         cursor = db.cursor()
         cursor.execute('truncate table data;')
         sql="insert into data(user_id, movie_id,rate,user_name,movie_name,user_location) values (%s,%s,%s,%s,%s,%s);"

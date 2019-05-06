@@ -3,7 +3,11 @@ import math
 import sys
 
  # 打开数据库连接
-db = pymysql.connect("123.207.154.167","root","123456wang","userBase" ) 
+host = ''
+user = ''
+sql_passwd = ''
+used_database = ''
+db = pymysql.connect(host,user,sql_passwd,used_database) 
 cursor = db.cursor()
 sql = "SELECT * FROM data"
 try:
