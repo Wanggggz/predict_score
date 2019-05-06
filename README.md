@@ -4,6 +4,8 @@
 
 第三方包:pymysql
 
+使用时需要在predict_Score.py和data_wash.py里将mysql地址和用户名密码数据库改成自己的
+
 使用方法举例:
 
 import Api
